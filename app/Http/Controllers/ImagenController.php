@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pasajero;
-use App\Models\Pasaporte;
+Use App\Models\Imagen;
 
-class PasajeroController extends Controller
+class ImagenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,9 @@ class PasajeroController extends Controller
      */
     public function index()
     {
-         $pasajero=Pasajero::all();
-        return $pasajero;
-
-       //return csrf_token(); //u6frn5H8XepuZsIXPuAqXzaPL9vxEJsry03iwzPF
-
+        $imagen = Imagen::find(3); 
+        $imageable = $imagen->imageable;
+        return $imageable;
     }
 
     /**
@@ -40,13 +37,7 @@ class PasajeroController extends Controller
      */
     public function store(Request $request)
     {
-        $pasajero=Pasajero::create($request->all());
-        
-        $pasaporte= [
-            'numero'=>'4514'];
-
-        $pasajero_pasaporte=$pasajero->pasaporte()->create($pasaporte);
-        return $pasajero_pasaporte;
+        //
     }
 
     /**

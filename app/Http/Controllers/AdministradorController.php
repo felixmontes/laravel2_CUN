@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pasajero;
-use App\Models\Pasaporte;
+use App\Models\Administrador;
+use App\Models\Imagen;
 
-class PasajeroController extends Controller
+class AdministradorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class PasajeroController extends Controller
      */
     public function index()
     {
-         $pasajero=Pasajero::all();
-        return $pasajero;
-
-       //return csrf_token(); //u6frn5H8XepuZsIXPuAqXzaPL9vxEJsry03iwzPF
-
+      /*  $administrador=Administrador::all();
+        return csrf_token();  //tdqGr7qezbLnFDeEW7odFNvVNuEUv7szlmyNCHVh  */
+        $administrador = Administrador::find(2); 
+        $imagen = $administrador->imagen; 
+       return $imagen; 
     }
 
     /**
@@ -38,16 +38,30 @@ class PasajeroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storecreate(Request $request)
     {
-        $pasajero=Pasajero::create($request->all());
-        
-        $pasaporte= [
-            'numero'=>'4514'];
-
-        $pasajero_pasaporte=$pasajero->pasaporte()->create($pasaporte);
-        return $pasajero_pasaporte;
+        $administrador=Administrador::find(1);
+        $imagen=[
+            'url'=>'https://www.gettyimages.es'
+        ];
+        $adm=$administrador->imagen()->create($imagen);
+        return $adm;
     }
+
+    public function storecreatemany(Request $request)
+{
+    $administrador=Administrador::find(2);
+    $adm=$administrador->imagen()->createMany([
+        [
+            'url'=>'https://richos.gitbooks.io/laravel-5/content/capitulos/chapter8.html',  
+        ],
+        [
+            'url'=>'https://github.com/felixmontes/laravel2_CUN'
+        ],
+    ]);
+
+    return $adm;
+}
 
     /**
      * Display the specified resource.

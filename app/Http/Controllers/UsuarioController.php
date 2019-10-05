@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pasajero;
-use App\Models\Pasaporte;
+use App\Models\Usuario;
+use App\Models\Imagen;
 
-class PasajeroController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,9 @@ class PasajeroController extends Controller
      */
     public function index()
     {
-         $pasajero=Pasajero::all();
-        return $pasajero;
-
-       //return csrf_token(); //u6frn5H8XepuZsIXPuAqXzaPL9vxEJsry03iwzPF
-
+        $usuario = Usuario::find(2); 
+        $imagen = $usuario->imagen; 
+        return $imagen;
     }
 
     /**
@@ -38,15 +36,27 @@ class PasajeroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeCreate (Request $request)
     {
-        $pasajero=Pasajero::create($request->all());
-        
-        $pasaporte= [
-            'numero'=>'4514'];
-
-        $pasajero_pasaporte=$pasajero->pasaporte()->create($pasaporte);
-        return $pasajero_pasaporte;
+        $usuario=Usuario::find(2);
+        $imagen=[
+            'url'=>'https://encrypted-tbn0.gstatic.com'
+        ];
+        $usu=$usuario->imagen()->create($imagen);
+        return $usu;
+    }
+    public function Storecreatemany(Request $request)
+    {
+        $usuario=Usuario::find(4);
+        $usu=$usuario->imagen()->createMany([
+            [
+                'url'=>'https://www.google.com',  
+            ],
+            [
+                'url'=>'https://www.gmail'
+            ],
+        ]);
+        return $usu;
     }
 
     /**

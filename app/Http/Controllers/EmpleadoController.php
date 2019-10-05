@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pasajero;
-use App\Models\Pasaporte;
+use App\Models\Empleado;
+use App\Models\Imagen;
 
-class PasajeroController extends Controller
+class EmpleadoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,9 @@ class PasajeroController extends Controller
      */
     public function index()
     {
-         $pasajero=Pasajero::all();
-        return $pasajero;
-
-       //return csrf_token(); //u6frn5H8XepuZsIXPuAqXzaPL9vxEJsry03iwzPF
-
+        $empleado = Empleado::find(2); 
+        $imagen = $empleado->imagen; 
+        return $imagen;
     }
 
     /**
@@ -38,16 +36,29 @@ class PasajeroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storecreate (Request $request)
     {
-        $pasajero=Pasajero::create($request->all());
-        
-        $pasaporte= [
-            'numero'=>'4514'];
-
-        $pasajero_pasaporte=$pasajero->pasaporte()->create($pasaporte);
-        return $pasajero_pasaporte;
+        $empleado=Empleado::find(4);
+        $imagen=[
+            'url'=>'https://www.easyclass.com'
+        ];
+        $emp=$empleado->imagen()->create($imagen);
+        return $emp;
     }
+
+    public function storecreatemany(Request $request)
+{
+    $empleado=Empleado::find(5);
+    $emp=$empleado->imagen()->createMany([
+        [
+            'url'=>'https://www.msn.com/es-co/?refurl=%2fes',  
+        ],
+        [
+            'url'=>'https://www.youtube.com'
+        ],
+    ]);
+    return $emp;
+}
 
     /**
      * Display the specified resource.
