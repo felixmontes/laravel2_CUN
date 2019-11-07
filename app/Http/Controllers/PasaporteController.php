@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PasajeroRequest;
-use App\Models\Pasajero;
+use App\Http\Requests\PasaporteRequest;
 use App\Models\Pasaporte;
+use App\Models\Pasajero;
 
-class PasajeroController extends Controller
+class PasaporteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class PasajeroController extends Controller
      */
     public function index()
     {
-         $pasajero=Pasajero::all();
-       // return $pasajero;
-         return csrf_token(); //u6frn5H8XepuZsIXPuAqXzaPL9vxEJsry03iwzPF
+        $pasaporte=Pasaporte::all();
+       // return $pasaporte;
+         return csrf_token();
     }
 
     /**
@@ -37,17 +37,12 @@ class PasajeroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PasajeroRequest $request)
+    public function store(PasaporteRequest $request)
     {
-        // $pasajero=Pasajero::create($request->all());
-        // $pasaporte= [ 'numero'=>'4514'];
-        // $pasajero_pasaporte=$pasajero->pasaporte()->create($pasaporte);
-        // return $pasajero_pasaporte;
-        
         $data=$request->all();
-     $pasajero=Pasajero::create($data);
-        return $pasajero;
-    } 
+     $pasaporte=Pasaporte::create($data);
+        return $pasaporte;
+    }
 
     /**
      * Display the specified resource.
@@ -78,17 +73,14 @@ class PasajeroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PasajeroRequest $request, $id)
-    {
-$pasajero=Pasajero::find($id);
-$datosp=array();
-$datosp['nombre']=$request->nombre;
-$datosp['apellido']=$request->apellido;
-$datosp['direccion']=$request->direccion;
-$datosp['telefono']=$request->telefono;
+    public function update(PasaporteRequest $request, $id){
+        $pasaporte=Pasaporte::find($id);
+        $datosp=array();
+        $datosp['numero']=$request->numero;
+        $datosp['pasajero_id']=$request->pasajero_id;
 
-$pasajero->update($datosp);
-return $pasajero;
+        $pasaporte->update($datosp);
+        return $pasaporte;       
     }
 
     /**

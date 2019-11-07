@@ -43,3 +43,12 @@ Route::post('/empleado/create', 'EmpleadoController@storecreate');
 Route::post('/empleado/createmany', 'EmpleadoController@storecreatemany');
 
 Route::get('/imagen', 'ImagenController@index');
+
+//validacion rutas  3 corte
+
+Route::get('/pasajero', 'PasajeroController@index');
+Route::post('pasajero/guardar', 'PasajeroController@store');
+Route::POST('pasajero/actualizar/{id}', 'PasajeroController@update');
+
+Route::post('pasaporte/guardar', 'PasaporteController@store');
+Route::POST('pasaporte/actualizar/{id}', 'PasaporteController@update');
