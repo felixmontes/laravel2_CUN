@@ -13,14 +13,15 @@ class Curso extends Model
     public function clases(){
         return $this->hasMany('App\Models\Clase');
 
-  
-  
     }
-
-
-    public function programas() { 
-        return $this->hasManyThrough('App\Models\Programa','App\Models\Clase'); 
-        
-}
+     public function programas() { 
+        return $this->hasManyThrough('App\Models\Programa','App\Models\Clase');       
+    } 
+     public function getInformacionCursoAttribute(){
+    return "{$this->id} {$this->nombre}{$this->fecha_inicio}";
+    }
+      public function getListaClaseAttribute(){
+    return $this->clases;
+    }
 
 }

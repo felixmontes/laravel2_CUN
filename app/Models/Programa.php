@@ -13,4 +13,12 @@ class Programa extends Model
     public function clase(){
         return $this->belongsTo('App\Models\Clase','clase_id');
     }
+    public function setNombreAttribute($value){
+        $this->attributes['nombre']=ucfirst($value);
+    }
+    
+     protected $casts = [
+        'informacion_programa'=>'array'
+    ];
+    
 }

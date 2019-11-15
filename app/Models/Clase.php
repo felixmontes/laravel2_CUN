@@ -17,4 +17,25 @@ class Clase extends Model
     public function programas(){
         return $this->hasMany('App\Models\Programa');
     }
+
+     public function getDatosClaseAttribute(){
+     return "{$this->id} {$this->nombre} {$this->aula} {$this->curso_id}";  
+     }
+
+     public function getListaProgramaAttribute(){
+       return $this->programas;
+     }
+
+     public function getListaCursoAttribute(){
+      return $this->cursos;
+     }
+
+     Protected $appends=[
+       'lista_programa',
+       ];
+
+   protected $casts = [
+      'estado' => 'boolean',];
+  
 }
+
